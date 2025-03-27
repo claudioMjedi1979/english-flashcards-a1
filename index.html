@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EnglishBot Flashcards – A1</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+  <style>
+    body {
+      background-color: #e6f0ff;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    header img {
+      width: 80px;
+      height: auto;
+    }
+    .card {
+      background: #ffffff;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      padding: 2rem;
+      margin: 1rem auto;
+      text-align: center;
+      max-width: 500px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .feedback {
+      font-style: italic;
+      font-weight: bold;
+      margin-top: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header>
+      <img src="https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg" alt="UK Flag" />
+      <h2>EnglishBot Flashcards – 🇬🇧</h2>
+      <p>Pratique com frases do dia a dia. Escolha a tradução correta e ouça a pronúncia.</p>
+    </header>
+
+    <div class="card">
+      <h3 id="question"></h3>
+      <div class="options" id="options"></div>
+      <p class="feedback" id="feedback"></p>
+    </div>
+
+    <div class="controls">
+      <button onclick="prevCard()">⬅️ Anterior</button>
+      <button onclick="playAudio()">🔊 Ouvir</button>
+      <button onclick="nextCard()">Próximo ➡️</button>
+    </div>
+  </main>
+
+  <script>
+    const cards = [
+      { en: "What is your name?", correct: "Qual é o seu nome?", choices: ["Qual é o seu nome?", "Onde você mora?", "Qual sua idade?"] },
+      { en: "How are you?", correct: "Como você está?", choices: ["Como você está?", "Você fala inglês?", "Você gosta de comida?"] },
+      { en: "Where do you live?", correct: "Onde você mora?", choices: ["Onde você mora?", "O que você estuda?", "Qual a sua cor favorita?"] },
+      { en: "I like music.", correct: "Eu gosto de música.", choices: ["Eu gosto de música.", "Eu odeio correr.", "Você tem um gato?"] },
+      { en: "Good morning!", correct: "Bom dia!", choices: ["Bom dia!", "Boa noite!", "Até logo!"] },
+      { en: "See you tomorrow.", correct: "Até amanhã.", choices: ["Até amanhã.", "Prazer em conhecê-lo.", "Bom trabalho."] },
+      { en: "I’m hungry.", correct: "Estou com fome.", choices: ["Estou com fome.", "Estou cansado.", "Estou com frio."] },
+      { en: "I’m cold.", correct: "Estou com frio.", choices: ["Estou com frio.", "Estou com fome.", "Estou atrasado."] },
+      { en: "I’m learning English.", correct: "Estou aprendendo inglês.", choices: ["Estou aprendendo inglês.", "Eu sou brasileiro.", "Eu gosto de chocolate."] },
+      { en: "Can you help me?", correct: "Você pode me ajudar?", choices: ["Você pode me ajudar?", "Você gosta de dançar?", "Você quer água?"] },
+      { en: "Do you like pizza?", correct: "Você gosta de pizza?", choices: ["Você gosta de pizza?", "Você estuda matemática?", "Você fala alemão?"] },
+      { en: "It is raining.", correct: "Está chovendo.", choices: ["Está chovendo.", "Está nevando.", "Está ensolarado."] }
+    ];
+
+    let current = 0;
+
+    function loadCard() {
+      const q = document.getElementById("question");
+      const o = document.getElementById("options");
+      const f = document.getElementById("feedback");
+
+      f.innerText = "";
+      q.innerText = cards[current].en;
+
+      o.innerHTML = "";
+      shuffle(cards[current].choices).forEach(choice => {
+        const btn = document.createElement("button");
+        btn.textContent = choice;
+        btn.onclick = () => checkAnswer(choice);
+        o.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(selected) {
+      const correct = cards[current].correct;
+      const f = document.getElementById("feedback");
+      if (selected === correct) {
+        f.innerText = "✅ Correto!";
+        f.style.color = "green";
+      } else {
+        f.innerText = `❌ Errado! A correta é: ${correct}`;
+        f.style.color = "red";
+      }
+    }
+
+    function nextCard() {
+      current = (current + 1) % cards.length;
+      loadCard();
+    }
+
+    function prevCard() {
+      current = (current - 1 + cards.length) % cards.length;
+      loadCard();
+    }
+
+    function playAudio() {
+      const utter = new SpeechSynthesisUtterance(cards[current].en);
+      utter.lang = "en-US";
+      speechSynthesis.speak(utter);
+    }
+
+    function shuffle(arr) {
+      return [...arr].sort(() => Math.random() - 0.5);
+    }
+
+    loadCard();
+  </script>
+</body>
+</html>
