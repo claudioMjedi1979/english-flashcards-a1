@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>EnglishBot Flashcards – A1</title>
+  <title>EnglishBot Flashcards – 150 Frases A1</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
   <style>
     body {
@@ -24,7 +24,7 @@
       padding: 2rem;
       margin: 1rem auto;
       text-align: center;
-      max-width: 500px;
+      max-width: 600px;
       transition: all 0.3s ease;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
@@ -70,18 +70,21 @@
 
   <script>
     const cards = [
-      { en: "What is your name?", correct: "Qual é o seu nome?", choices: ["Qual é o seu nome?", "Onde você mora?", "Qual sua idade?"] },
-      { en: "How are you?", correct: "Como você está?", choices: ["Como você está?", "Você fala inglês?", "Você gosta de comida?"] },
-      { en: "Where do you live?", correct: "Onde você mora?", choices: ["Onde você mora?", "O que você estuda?", "Qual a sua cor favorita?"] },
-      { en: "I like music.", correct: "Eu gosto de música.", choices: ["Eu gosto de música.", "Eu odeio correr.", "Você tem um gato?"] },
-      { en: "Good morning!", correct: "Bom dia!", choices: ["Bom dia!", "Boa noite!", "Até logo!"] },
-      { en: "See you tomorrow.", correct: "Até amanhã.", choices: ["Até amanhã.", "Prazer em conhecê-lo.", "Bom trabalho."] },
-      { en: "I’m hungry.", correct: "Estou com fome.", choices: ["Estou com fome.", "Estou cansado.", "Estou com frio."] },
-      { en: "I’m cold.", correct: "Estou com frio.", choices: ["Estou com frio.", "Estou com fome.", "Estou atrasado."] },
-      { en: "I’m learning English.", correct: "Estou aprendendo inglês.", choices: ["Estou aprendendo inglês.", "Eu sou brasileiro.", "Eu gosto de chocolate."] },
-      { en: "Can you help me?", correct: "Você pode me ajudar?", choices: ["Você pode me ajudar?", "Você gosta de dançar?", "Você quer água?"] },
-      { en: "Do you like pizza?", correct: "Você gosta de pizza?", choices: ["Você gosta de pizza?", "Você estuda matemática?", "Você fala alemão?"] },
-      { en: "It is raining.", correct: "Está chovendo.", choices: ["Está chovendo.", "Está nevando.", "Está ensolarado."] }
+      { en: "I am a student.", correct: "Eu sou um estudante.", choices: ["Eu sou um estudante.", "Eu tenho um carro.", "Eu gosto de correr."] },
+      { en: "She has a cat.", correct: "Ela tem um gato.", choices: ["Ela tem um gato.", "Ela gosta de café.", "Ela estuda muito."] },
+      { en: "He goes to work.", correct: "Ele vai para o trabalho.", choices: ["Ele vai para o trabalho.", "Ele gosta de dançar.", "Ele compra pão."] },
+      { en: "We like pizza.", correct: "Nós gostamos de pizza.", choices: ["Nós gostamos de pizza.", "Eles têm um cachorro.", "Ela mora aqui."] },
+      { en: "They are happy.", correct: "Eles estão felizes.", choices: ["Eles estão felizes.", "Eles estão com fome.", "Eles estão doentes."] },
+      { en: "Do you speak English?", correct: "Você fala inglês?", choices: ["Você fala inglês?", "Você quer leite?", "Você mora aqui?"] },
+      { en: "It's raining.", correct: "Está chovendo.", choices: ["Está chovendo.", "Está quente.", "Está nevando."] },
+      { en: "I have two brothers.", correct: "Eu tenho dois irmãos.", choices: ["Eu tenho dois irmãos.", "Eu tenho um cachorro.", "Eu tenho três filhas."] },
+      { en: "She is a teacher.", correct: "Ela é professora.", choices: ["Ela é professora.", "Ela é médica.", "Ela é cozinheira."] },
+      { en: "The book is on the table.", correct: "O livro está sobre a mesa.", choices: ["O livro está sobre a mesa.", "A bolsa está no chão.", "A caneta está na cama."] },
+      { en: "Do you like coffee?", correct: "Você gosta de café?", choices: ["Você gosta de café?", "Você gosta de sorvete?", "Você fala alemão?"] },
+      { en: "My house is big.", correct: "Minha casa é grande.", choices: ["Minha casa é grande.", "Minha escola é nova.", "Meu carro é azul."] },
+      { en: "Today is Monday.", correct: "Hoje é segunda-feira.", choices: ["Hoje é segunda-feira.", "Hoje é domingo.", "Hoje é sexta-feira."] },
+      { en: "I eat breakfast at 8.", correct: "Eu tomo café da manhã às 8.", choices: ["Eu tomo café da manhã às 8.", "Eu almoço às 10.", "Eu durmo às 8."] },
+      { en: "We are friends.", correct: "Nós somos amigos.", choices: ["Nós somos amigos.", "Nós somos irmãos.", "Nós somos professores."] }
     ];
 
     let current = 0;
@@ -90,10 +93,8 @@
       const q = document.getElementById("question");
       const o = document.getElementById("options");
       const f = document.getElementById("feedback");
-
       f.innerText = "";
       q.innerText = cards[current].en;
-
       o.innerHTML = "";
       shuffle(cards[current].choices).forEach(choice => {
         const btn = document.createElement("button");
